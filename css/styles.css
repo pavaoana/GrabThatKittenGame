@@ -22,7 +22,56 @@ h1 {
 }
 
 p {
-  font-size: large;
+  font-size: 2.2vw;
+  font-weight: 600;
+  color: #5e696c;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #989d9f;
+}
+
+button {
+  padding: 2vh 2vw;
+  margin-top: 5vh;
+  border: none;
+  border-radius: 2%;
+  background-color: #5e696c;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2vw;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#start-button {
+  background-color: transparent;
+  font-size: 6vw;
+  font-weight: bolder;
+  color: #5e696c;
+  letter-spacing: 1vw;
+}
+
+.start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20vh;
+}
+
+#start-button:hover {
+  color: #f55e61;
+  font-size: 7vw;
+}
+
+#instructions {
+  width: 100%;
+  font-size: 1.8vw;
+  font-weight: bolder;
+  color: #5e696c;
+  margin-top: 1vh;
+  text-align: center;
 }
 
 #game-board {
