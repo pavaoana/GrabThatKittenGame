@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.paw {
+  background-image: url("/images/paw.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+h1,
+p,
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 6vw;
+  font-weight: bolder;
+  color: #f55e61;
+  margin-top: 4vw;
+}
+
+p {
+  font-size: 2.2vw;
+  font-weight: 600;
+  color: #5e696c;
+  text-align: center;
+}
+
+.start-button:hover {
+  background-color: #f55e61ac;
+}
+
+.instr {
+  padding: 1.5vh 1.5vw;
+  margin-top: 10vh;
+  border: none;
+  border-radius: 2%;
+  background-color: #5e696c8e;
+  color: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 2vw;
+  font-weight: bolder;
+}
+
+a {
+  text-decoration: none;
+  font-size: 4vw;
+  font-weight: bolder;
+  color: #5e696c;
+  letter-spacing: 1vw;
+}
+
+.start-button {
+  background-color: transparent;
+}
+
+.a:hover:hover {
+  color: #f55e61;
+}
+
+#instructions {
+  width: 100%;
+  font-size: 1.8vw;
+  font-weight: bolder;
+  color: #5e696c;
+  margin-top: 1vh;
+  text-align: center;
+  line-height: 2.4vw;
+}
