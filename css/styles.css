@@ -4,6 +4,18 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+.kitten {
+  background: url("/images/large_kitty-cat.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+#game-board {
+  cursor: ;
+}
+
+/* 
 h1,
 p,
 div {
@@ -81,3 +93,4 @@ button {
   width: 30vw;
   height: 30vw;
 }
+*/
