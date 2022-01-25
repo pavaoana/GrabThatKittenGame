@@ -15,9 +15,21 @@
     <div class="full-screen">
       <div id="game-board"></div>
     </div>
+
     <div id="game-over-page">
-      <h1>Game over</h1>
+      <h1>Wow. You really suck at this.</h1>
+      <img id="lost" src="/images/unimpressed-cat-pink.jpg" alt="unimpressed cat">
+      <button class="lost-restart"><a href="./index.html">PLAY AGAIN</a></button>
     </div>
+    
+    <div id="game-win-page">
+      <h1>OMG! Amazing job!</h1>
+      <p>You saved so many kittens. Thank you.<br>
+        Now they need to rest.</p>
+        <img id="won" src="/images/basket-full-kittens-2.jpg">
+      <button class="won-restart"><a href="./index.html">PLAY AGAIN</a></button>
+    </div>
+
   </container>
   <script src="/js/main.js"></script>
 </body>

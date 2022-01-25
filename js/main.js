@@ -3,10 +3,13 @@ class Game {
   constructor() {
     this.kittensArr = [];
     this.kittensClicked = 0;
+    this.maxKittens = 13; // if max=15, max it's actually 27 because we're removing elements from the array ( if 13, then it's 23)
+    this.minKittens = 14; // this doesnt need to be lower that the max due to the reason above
     this.createKittensIntervalId = null;
     this.removeKittensIntervalId = null;
     this.gameOver = false;
     this.gameOverPage = document.getElementById("game-over-page");
+    this.gameWinPage = document.getElementById("game-win-page");
     this.gamePage = document.getElementById("game-board");
   }
 
@@ -14,7 +17,9 @@ class Game {
     //this.gameOver = false
 
     this.gameOverPage.style.display = "none";
+    this.gameWinPage.style.display = "none";
     this.gamePage.style.display = "block";
+
     this.createKittensIntervalId = setInterval(() => {
       const kitten = new Kitten();
       this.kittensArr.push(kitten);
@@ -25,20 +30,26 @@ class Game {
       kitten.domElement.addEventListener("click", (event) => {
         kitten.domElement.remove();
         this.kittensClicked++;
-        console.log("clicked a kitten");
-        console.log(this.kittensClicked);
       });
-      if (this.kittensArr.length >= 10 && this.kittensClicked <= 7) {
-        this.endGame();
+
+      if (
+        this.kittensArr.length >= this.maxKittens &&
+        this.kittensClicked <= this.minKittens
+      ) {
+        this.loseGame();
         //alert("Game Over!");
         clearInterval(this.createKittensIntervalId);
         this.gameOver = true;
-      } else if (this.kittensArr.length >= 10 && this.kittensClicked > 7) {
-        alert("You Won!");
+      } else if (
+        this.kittensArr.length >= this.maxKittens &&
+        this.kittensClicked > this.minKittens
+      ) {
+        // alert("You Won!");
+        this.winGame();
         clearInterval(this.createKittensIntervalId);
         this.gameOver = true;
       }
-    }, 1000);
+    }, 750);
 
     this.removeKittensIntervalId = setInterval(() => {
       const kittenToRemove = this.kittensArr.shift();
@@ -47,12 +58,12 @@ class Game {
       if (this.gameOver) {
         clearInterval(this.removeKittensIntervalId);
       }
-    }, 6000);
+    }, 1500);
   }
 
   createDomElm(instance) {
-    const htmlTag = document.createElement("div"); // create html element (not added to the dom yet)
-    htmlTag.className = instance.className; // add class (we can reuse this function to create different types of elements in the dom, eg. player, obstacles....)
+    const htmlTag = document.createElement("div"); // create html element (not in the DOM yet)
+    htmlTag.className = instance.className; // add class (can reuse this function to create other elements in the DOM)
     htmlTag.style.width = instance.width + "vw";
     htmlTag.style.height = instance.height + "vh";
     const board = document.getElementById("game-board"); // reference to the parent container
@@ -65,8 +76,15 @@ class Game {
     instance.domElement.style.bottom = instance.positionY + "vh";
   }
 
-  endGame() {
+  loseGame() {
     this.gameOverPage.style.display = "block";
+    this.gameWinPage.style.display = "none";
+    this.gamePage.style.display = "none";
+  }
+
+  winGame() {
+    this.gameOverPage.style.display = "none";
+    this.gameWinPage.style.display = "block";
     this.gamePage.style.display = "none";
   }
 }
