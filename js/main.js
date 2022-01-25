@@ -2,49 +2,52 @@
 class Game {
   constructor() {
     this.kittensArr = [];
-    this.mommaCatArr = [];
-    this.mrRatArr = [];
+    this.kittensClicked = 0;
+    this.createKittensIntervalId = null;
+    this.removeKittensIntervalId = null;
+    this.gameOver = false;
+    this.gameOverPage = document.getElementById("game-over-page");
+    this.gamePage = document.getElementById("game-board");
   }
 
   start() {
-    setInterval(() => {
+    //this.gameOver = false
+
+    this.gameOverPage.style.display = "none";
+    this.gamePage.style.display = "block";
+    this.createKittensIntervalId = setInterval(() => {
       const kitten = new Kitten();
       this.kittensArr.push(kitten);
       kitten.domElement = this.createDomElm(kitten);
       this.drawDomElm(kitten);
+
+      // add event listener
+      kitten.domElement.addEventListener("click", (event) => {
+        kitten.domElement.remove();
+        this.kittensClicked++;
+        console.log("clicked a kitten");
+        console.log(this.kittensClicked);
+      });
+      if (this.kittensArr.length >= 10 && this.kittensClicked <= 7) {
+        this.endGame();
+        //alert("Game Over!");
+        clearInterval(this.createKittensIntervalId);
+        this.gameOver = true;
+      } else if (this.kittensArr.length >= 10 && this.kittensClicked > 7) {
+        alert("You Won!");
+        clearInterval(this.createKittensIntervalId);
+        this.gameOver = true;
+      }
     }, 1000);
 
-    setInterval(() => {
+    this.removeKittensIntervalId = setInterval(() => {
       const kittenToRemove = this.kittensArr.shift();
       kittenToRemove.domElement.remove();
-    }, 1400);
 
-    /*
-    setInterval(() => {
-      const momma = new MommaCat();
-      this.mommaCatArr.push(momma);
-      momma.domElement = this.createDomElm(momma);
-      this.drawDomElm(momma);
-      console.log("momma created" + this.positionXMomma + this.positionYMomma);
-    }, 8000);
-
-    setInterval(() => {
-      const mommaToRemove = this.mommaCatArr.shift();
-      mommaToRemove.domElement.remove();
-    }, 2000);
-
-    setInterval(() => {
-      const rat = new MrRat();
-      this.mrRatArr.push(rat);
-      rat.domElement = this.createDomElm(rat);
-      this.drawDomElm(rat);
-    }, 5000);
-
-    setInterval(() => {
-      const ratToRemove = this.mrRatArr.shift();
-      ratToRemove.domElement.remove();
-    }, 2000);
-    */
+      if (this.gameOver) {
+        clearInterval(this.removeKittensIntervalId);
+      }
+    }, 6000);
   }
 
   createDomElm(instance) {
@@ -61,6 +64,11 @@ class Game {
     instance.domElement.style.left = instance.positionX + "vw";
     instance.domElement.style.bottom = instance.positionY + "vh";
   }
+
+  endGame() {
+    this.gameOverPage.style.display = "block";
+    this.gamePage.style.display = "none";
+  }
 }
 
 class Kitten {
@@ -74,35 +82,5 @@ class Kitten {
   }
 }
 
-/* class MommaCat {
-  constructor() {
-    this.className = "momma";
-    this.width = 7;
-    this.height = 12;
-    this.positionXMomma = Math.floor(Math.random() * (100 - this.width + 1));
-    this.positionYMomma = Math.floor(Math.random() * (100 - this.height + 1));
-    this.domElement = null;
-  }
-}
-
-class MrRat {
-  constructor() {
-    this.className = "rat";
-    this.width = 10;
-    this.height = 4;
-    this.positionX = Math.floor(Math.random() * (100 - this.width + 1));
-    this.positionY = Math.floor(Math.random() * (100 - this.height + 1));
-    this.domElement = null;
-  } 
-} */
-
 const game = new Game();
 game.start();
-
-//
-/* 
-See if it helps:
-https://habr.com/en/sandbox/144776/
-https://www.geeksforgeeks.org/design-hit-the-mouse-game-using-html-css-and-vanilla-javascript/
-https://stackoverflow.com/questions/24249314/simple-2d-game-using-a-mouse
-*/
