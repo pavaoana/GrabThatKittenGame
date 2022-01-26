@@ -6,6 +6,10 @@ body {
   background-color: #5e696c;
 }
 
+/*
+cursor: url("../images/basket-pink.svg"), auto;
+*/
+
 #counter {
   padding: 1vw 1vh;
   font-weight: bolder;

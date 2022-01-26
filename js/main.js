@@ -19,7 +19,7 @@ class Game {
   }
 
   start() {
-    //this.gameOver = false
+    this.gameOver = false;
 
     this.gameOverPage.style.display = "none";
     this.gameWinPage.style.display = "none";
@@ -128,7 +128,7 @@ class Kitten {
     this.width = 5;
     this.height = 10;
     this.positionX = Math.floor(Math.random() * (100 - this.width + 1)); // random number between 0 and 100-width
-    this.positionY = Math.floor(Math.random() * (100 - this.height + 1)); // random number between 0 and 100-height
+    this.positionY = Math.floor(Math.random() * (90 - this.height + 1)); // random number between 0 and 100-height
     this.domElement = null;
   }
 }
@@ -139,7 +139,7 @@ class MommaCat {
     this.width = 7;
     this.height = 12;
     this.positionX = Math.floor(Math.random() * (100 - this.width + 1));
-    this.positionY = Math.floor(Math.random() * (100 - this.height + 1));
+    this.positionY = Math.floor(Math.random() * (90 - this.height + 1));
     this.domElement = null;
   }
 }
