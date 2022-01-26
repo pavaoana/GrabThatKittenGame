@@ -6,7 +6,7 @@ body {
 }
 
 .paw {
-  background-image: url("/images/paw.png");
+  background-image: url("./images/paw.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
