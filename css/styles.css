@@ -6,8 +6,21 @@ body {
   background-color: #5e696c;
 }
 
+#counter {
+  padding: 1vw 1vh;
+  font-weight: bolder;
+  color: white;
+}
+
 .kitten {
   background: url("../images/kitty.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+.momma {
+  background: url("../images/momma-cat.svg");
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;

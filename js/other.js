@@ -1,25 +1,44 @@
-// Game Logic:
-class Game {
-  constructor() {
-    this.kittensArr = [];
-    /* this.mommaCatArr = [];
-    this.mrRatArr = []; */
-  }
 
-  grabKitten();
-
-  start() {
-    setInterval(() => {
-      const kitten = new Kitten();
+    this.createMommaCatIntervalId = setInterval(() => {
+      const momma = new Kitten();
       this.kittensArr.push(kitten);
       kitten.domElement = this.createDomElm(kitten);
       this.drawDomElm(kitten);
-    }, 1000);
 
-    setInterval(() => {
+      // add event listener
+      kitten.domElement.addEventListener("click", (event) => {
+        kitten.domElement.remove();
+        this.kittensClicked++;
+        document.getElementById("sum").innerHTML = this.kittensClicked;
+      });
+
+      if (
+        this.kittensArr.length >= this.maxKittens &&
+        this.kittensClicked <= this.minKittens
+      ) {
+        this.loseGame();
+        //alert("Game Over!");
+        clearInterval(this.createKittensIntervalId);
+        this.gameOver = true;
+      } else if (
+        this.kittensArr.length >= this.maxKittens &&
+        this.kittensClicked > this.minKittens
+      ) {
+        // alert("You Won!");
+        this.winGame();
+        clearInterval(this.createKittensIntervalId);
+        this.gameOver = true;
+      }
+    }, 750);
+
+    this.removeKittensIntervalId = setInterval(() => {
       const kittenToRemove = this.kittensArr.shift();
       kittenToRemove.domElement.remove();
-    }, 1400);
+
+      if (this.gameOver) {
+        clearInterval(this.removeKittensIntervalId);
+      }
+    }, 1500);
 
     /*
     setInterval(() => {
@@ -78,7 +97,7 @@ class Kitten {
   }
 }
 
-/* class MommaCat {
+class MommaCat {
   constructor() {
     this.className = "momma";
     this.width = 7;
@@ -88,7 +107,7 @@ class Kitten {
     this.domElement = null;
   }
 }
-
+/*
 class MrRat {
   constructor() {
     this.className = "rat";

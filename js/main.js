@@ -2,15 +2,20 @@
 class Game {
   constructor() {
     this.kittensArr = [];
-    this.kittensClicked = 0;
+    this.mommaCatArr = [];
+    this.catsClicked = 0;
+    this.mommaPoints = 3;
     this.maxKittens = 13; // if max=15, max it's actually 27 because we're removing elements from the array ( if 13, then it's 23)
     this.minKittens = 14; // this doesnt need to be lower that the max due to the reason above
     this.createKittensIntervalId = null;
     this.removeKittensIntervalId = null;
+    this.createMommaIntervalId = null;
+    this.removeMommaIntervalId = null;
     this.gameOver = false;
     this.gameOverPage = document.getElementById("game-over-page");
     this.gameWinPage = document.getElementById("game-win-page");
     this.gamePage = document.getElementById("game-board");
+    this.counter = document.getElementById("counter");
   }
 
   start() {
@@ -29,12 +34,13 @@ class Game {
       // add event listener
       kitten.domElement.addEventListener("click", (event) => {
         kitten.domElement.remove();
-        this.kittensClicked++;
+        this.catsClicked++;
+        document.getElementById("sum").innerHTML = this.catsClicked;
       });
 
       if (
         this.kittensArr.length >= this.maxKittens &&
-        this.kittensClicked <= this.minKittens
+        this.catsClicked <= this.minKittens
       ) {
         this.loseGame();
         //alert("Game Over!");
@@ -42,7 +48,7 @@ class Game {
         this.gameOver = true;
       } else if (
         this.kittensArr.length >= this.maxKittens &&
-        this.kittensClicked > this.minKittens
+        this.catsClicked > this.minKittens
       ) {
         // alert("You Won!");
         this.winGame();
@@ -59,7 +65,32 @@ class Game {
         clearInterval(this.removeKittensIntervalId);
       }
     }, 1500);
+
+    // Momma Down
+    this.createMommaCatIntervalId = setInterval(() => {
+      const momma = new MommaCat();
+      this.mommaCatArr.push(momma);
+      momma.domElement = this.createDomElm(momma);
+      this.drawDomElm(momma);
+
+      // add event listener
+      momma.domElement.addEventListener("click", (event) => {
+        momma.domElement.remove();
+        this.catsClicked += this.mommaPoints;
+        document.getElementById("sum").innerHTML = this.catsClicked;
+      });
+    }, 6000);
+
+    this.removeMommaIntervalId = setInterval(() => {
+      const mommaToRemove = this.mommaCatArr.shift();
+      mommaToRemove.domElement.remove();
+
+      if (this.gameOver) {
+        clearInterval(this.removeMommaIntervalId);
+      }
+    }, 6900);
   }
+  // Momma Up
 
   createDomElm(instance) {
     const htmlTag = document.createElement("div"); // create html element (not in the DOM yet)
@@ -80,12 +111,14 @@ class Game {
     this.gameOverPage.style.display = "block";
     this.gameWinPage.style.display = "none";
     this.gamePage.style.display = "none";
+    this.counter.style.display = "none";
   }
 
   winGame() {
     this.gameOverPage.style.display = "none";
     this.gameWinPage.style.display = "block";
     this.gamePage.style.display = "none";
+    this.counter.style.display = "none";
   }
 }
 
@@ -96,6 +129,17 @@ class Kitten {
     this.height = 10;
     this.positionX = Math.floor(Math.random() * (100 - this.width + 1)); // random number between 0 and 100-width
     this.positionY = Math.floor(Math.random() * (100 - this.height + 1)); // random number between 0 and 100-height
+    this.domElement = null;
+  }
+}
+
+class MommaCat {
+  constructor() {
+    this.className = "momma";
+    this.width = 7;
+    this.height = 12;
+    this.positionX = Math.floor(Math.random() * (100 - this.width + 1));
+    this.positionY = Math.floor(Math.random() * (100 - this.height + 1));
     this.domElement = null;
   }
 }
