@@ -3,14 +3,18 @@ class Game {
   constructor() {
     this.kittensArr = [];
     this.mommaCatArr = [];
+
     this.catsClicked = 0;
     this.mommaPoints = 3;
-    this.maxKittens = 13; // if max=15, max it's actually 27 because we're removing elements from the array ( if 13, then it's 23)
-    this.minKittens = 14; // this doesnt need to be lower that the max due to the reason above
+    this.maxKittens = 13;
+    // if max=13, max it's actually 23 (we're removing elements from the array)
+    this.minKittens = 14; // for the same reason, this doesn't need to be lower than maxKittens
+
     this.createKittensIntervalId = null;
     this.removeKittensIntervalId = null;
     this.createMommaIntervalId = null;
     this.removeMommaIntervalId = null;
+
     this.gameOver = false;
     this.gameOverPage = document.getElementById("game-over-page");
     this.gameWinPage = document.getElementById("game-win-page");
@@ -25,38 +29,40 @@ class Game {
     this.gameWinPage.style.display = "none";
     this.gamePage.style.display = "block";
 
+    // creating kittens and displaying them
     this.createKittensIntervalId = setInterval(() => {
       const kitten = new Kitten();
       this.kittensArr.push(kitten);
       kitten.domElement = this.createDomElm(kitten);
       this.drawDomElm(kitten);
 
-      // add event listener
+      // click cats - they disappear - and are added to the basket(sum)
       kitten.domElement.addEventListener("click", (event) => {
         kitten.domElement.remove();
         this.catsClicked++;
+
         document.getElementById("sum").innerHTML = this.catsClicked;
       });
 
+      //winning and losing:
       if (
         this.kittensArr.length >= this.maxKittens &&
         this.catsClicked <= this.minKittens
       ) {
         this.loseGame();
-        //alert("Game Over!");
         clearInterval(this.createKittensIntervalId);
         this.gameOver = true;
       } else if (
         this.kittensArr.length >= this.maxKittens &&
         this.catsClicked > this.minKittens
       ) {
-        // alert("You Won!");
         this.winGame();
         clearInterval(this.createKittensIntervalId);
         this.gameOver = true;
       }
-    }, 750);
+    }, 750); // creating kittens interval
 
+    // removing uncklicled kittens after a while:
     this.removeKittensIntervalId = setInterval(() => {
       const kittenToRemove = this.kittensArr.shift();
       kittenToRemove.domElement.remove();
@@ -66,14 +72,14 @@ class Game {
       }
     }, 1500);
 
-    // Momma Down
+    // creating Momma Cat + display + remove + click + add to basket:
+
     this.createMommaCatIntervalId = setInterval(() => {
       const momma = new MommaCat();
       this.mommaCatArr.push(momma);
       momma.domElement = this.createDomElm(momma);
       this.drawDomElm(momma);
 
-      // add event listener
       momma.domElement.addEventListener("click", (event) => {
         momma.domElement.remove();
         this.catsClicked += this.mommaPoints;
@@ -90,14 +96,15 @@ class Game {
       }
     }, 6900);
   }
-  // Momma Up
+
+  // creating DOM elements:
 
   createDomElm(instance) {
-    const htmlTag = document.createElement("div"); // create html element (not in the DOM yet)
-    htmlTag.className = instance.className; // add class (can reuse this function to create other elements in the DOM)
+    const htmlTag = document.createElement("div"); // create html element
+    htmlTag.className = instance.className; // add class
     htmlTag.style.width = instance.width + "vw";
     htmlTag.style.height = instance.height + "vh";
-    const board = document.getElementById("game-board"); // reference to the parent container
+    const board = document.getElementById("game-board"); // parent container
     board.appendChild(htmlTag); // append the element to the dom
     return htmlTag;
   }
@@ -106,6 +113,8 @@ class Game {
     instance.domElement.style.left = instance.positionX + "vw";
     instance.domElement.style.bottom = instance.positionY + "vh";
   }
+
+  // which pages to display and when:
 
   loseGame() {
     this.gameOverPage.style.display = "block";
@@ -122,13 +131,15 @@ class Game {
   }
 }
 
+// creating the classes we'll use in the game:
+
 class Kitten {
   constructor() {
     this.className = "kitten";
     this.width = 5;
     this.height = 10;
     this.positionX = Math.floor(Math.random() * (100 - this.width + 1)); // random number between 0 and 100-width
-    this.positionY = Math.floor(Math.random() * (90 - this.height + 1)); // random number between 0 and 100-height
+    this.positionY = Math.floor(Math.random() * (90 - this.height + 1)); // random number between 0 and 90-height (so the cats won't cover the basket counter)
     this.domElement = null;
   }
 }

@@ -6,9 +6,9 @@ body {
   background-color: #5e696c;
 }
 
-/*
-cursor: url("../images/basket-pink.svg"), auto;
-*/
+#game {
+  cursor: url("../images/wicker-basket-64.png"), auto;
+}
 
 #counter {
   padding: 1vw 1vh;
@@ -30,13 +30,18 @@ cursor: url("../images/basket-pink.svg"), auto;
   position: absolute;
 }
 
-/* Winning Page: */
+@media only screen and (max-width: 800px) {
+  #game {
+    cursor: url("../images/wicker-basket-32.png"), auto;
+  }
+}
+
+/* Winning Page & Game Over Page: */
+
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
-
-/* Game Over Page: */
 
 h1,
 p,
