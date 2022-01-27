@@ -10,6 +10,9 @@ class Game {
     // if max=13, max it's actually 23 (we're removing elements from the array)
     this.minKittens = 14; // for the same reason, this doesn't need to be lower than maxKittens
 
+    this.meowSound = new Audio("./sounds/cat-meow.wav");
+    this.meowSound.volume = 0.2;
+
     this.createKittensIntervalId = null;
     this.removeKittensIntervalId = null;
     this.createMommaIntervalId = null;
@@ -38,6 +41,7 @@ class Game {
 
       // click cats - they disappear - and are added to the basket(sum)
       kitten.domElement.addEventListener("click", (event) => {
+        this.meowSound.play();
         kitten.domElement.remove();
         this.catsClicked++;
 
@@ -81,6 +85,7 @@ class Game {
       this.drawDomElm(momma);
 
       momma.domElement.addEventListener("click", (event) => {
+        this.meowSound.play();
         momma.domElement.remove();
         this.catsClicked += this.mommaPoints;
         document.getElementById("sum").innerHTML = this.catsClicked;
@@ -139,7 +144,7 @@ class Kitten {
     this.width = 5;
     this.height = 10;
     this.positionX = Math.floor(Math.random() * (100 - this.width + 1)); // random number between 0 and 100-width
-    this.positionY = Math.floor(Math.random() * (90 - this.height + 1)); // random number between 0 and 90-height (so the cats won't cover the basket counter)
+    this.positionY = Math.floor(Math.random() * (90 - this.height + 1)); // random number between 0 and 90-height (so the cats won't cover the basket counter) (doesn't work on phones, though)
     this.domElement = null;
   }
 }
