@@ -12,6 +12,12 @@ class Game {
 
     this.meowSound = new Audio("./sounds/cat-meow.wav");
     this.meowSound.volume = 0.2;
+    this.backgroundMusic = new Audio("./sounds/cat-song-by-dan-knoflicek.wav");
+    this.backgroundMusic.volume = 0.1;
+    this.winSound = new Audio("./sounds/fairy-success.wav");
+    this.winSound.volume = 0.2;
+    this.loseSound = new Audio("./sounds/lose-funny-retro.wav");
+    this.loseSound.volume = 0.4;
 
     this.createKittensIntervalId = null;
     this.removeKittensIntervalId = null;
@@ -26,6 +32,8 @@ class Game {
   }
 
   start() {
+    this.backgroundMusic.play();
+
     this.gameOver = false;
 
     this.gameOverPage.style.display = "none";
@@ -126,6 +134,8 @@ class Game {
     this.gameWinPage.style.display = "none";
     this.gamePage.style.display = "none";
     this.counter.style.display = "none";
+    this.backgroundMusic.pause();
+    this.loseSound.play();
   }
 
   winGame() {
@@ -133,6 +143,8 @@ class Game {
     this.gameWinPage.style.display = "block";
     this.gamePage.style.display = "none";
     this.counter.style.display = "none";
+    this.backgroundMusic.pause();
+    this.winSound.play();
   }
 }
 
