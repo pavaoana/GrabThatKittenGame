@@ -11,8 +11,9 @@ body {
 }
 
 #counter {
-  padding: 1vw 1vh;
+  padding: 1.5vw 3vh;
   font-weight: bolder;
+  font-size: 1.5vw;
   color: white;
 }
 
@@ -30,9 +31,22 @@ body {
   position: absolute;
 }
 
+@media only screen and (max-width: 1000px) {
+  #counter {
+    padding: 2vw 3vh;
+    font-size: 1.8vw;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   #game {
     cursor: url("../images/wicker-basket-32.png"), auto;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #counter {
+    font-size: 3vw;
   }
 }
 
