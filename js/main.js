@@ -13,7 +13,7 @@ class Game {
     this.meowSound = new Audio("./sounds/cat-meow.wav");
     this.meowSound.volume = 0.25;
     this.backgroundMusic = new Audio("./sounds/cat-song-by-dan-knoflicek.wav");
-    this.backgroundMusic.volume = 0.2;
+    this.backgroundMusic.volume = 0.3;
     this.winSound = new Audio("./sounds/fairy-success.wav");
     this.winSound.volume = 0.3;
     this.loseSound = new Audio("./sounds/lose-funny-retro.wav");
