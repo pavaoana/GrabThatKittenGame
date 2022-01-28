@@ -5,9 +5,9 @@ class Game {
 
     this.catsClicked = 0;
     this.mommaPoints = 3;
-    this.maxKittens = 13;
-    // if max=13, max it's actually 23 (we're removing elements from the array)
-    this.minKittens = 17; // for the same reason, this doesn't need to be lower than maxKittens
+    this.maxKittens = 10;
+    // if max=10, max it's actually 35 (we're removing elements from the array)
+    this.minKittens = 26; // for the same reason, this doesn't need to be lower than maxKittens
 
     this.meowSound = new Audio("./sounds/cat-meow.wav");
     this.meowSound.volume = 0.25;
@@ -60,7 +60,7 @@ class Game {
       //winning and losing:
       if (
         this.kittensArr.length >= this.maxKittens &&
-        this.catsClicked <= this.minKittens
+        this.catsClicked < this.minKittens
       ) {
         this.loseGame();
         clearInterval(this.createKittensIntervalId);
@@ -83,7 +83,7 @@ class Game {
       if (this.gameOver) {
         clearInterval(this.removeKittensIntervalId);
       }
-    }, 1500);
+    }, 1000);
 
     // creating Momma Cat + display + remove + click + add to basket:
 
@@ -108,7 +108,7 @@ class Game {
       if (this.gameOver) {
         clearInterval(this.removeMommaIntervalId);
       }
-    }, 6900);
+    }, 6700);
   }
 
   // creating DOM elements:
