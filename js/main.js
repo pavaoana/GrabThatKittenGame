@@ -6,8 +6,8 @@ class Game {
     this.catsClicked = 0;
     this.mommaPoints = 3;
     this.maxKittens = 10;
-    // if max=10, max it's actually 35 (we're removing elements from the array)
-    this.minKittens = 26; // for the same reason, this doesn't need to be lower than maxKittens
+    // if max=10, max it's actually 35 (we're removing elements from the array) + 4 momma cat (4x3=16)
+    this.minKittens = 44; // for the same reason, this doesn't need to be lower than maxKittens
 
     this.meowSound = new Audio("./sounds/cat-meow.wav");
     this.meowSound.volume = 0.25;
