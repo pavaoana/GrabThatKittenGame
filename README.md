@@ -1,6 +1,6 @@
-# GrabThatKittenGame
+# Grab That Kitten!
 
-Grab That Kitten! Game was my first project at Ironhack's Web Development Bootcamp. 
+This game was my first project at Ironhack's Web Development Bootcamp. 
 
 You can play the MVP here: https://pavaoana.github.io/GrabThatKittenGame/
 
@@ -35,6 +35,11 @@ A "you won" and "you lost" page are displayed whether you win or lose the game.
 They will redirect you to the game page if you would like to play again.
 
 The game is responsive enough to be played on your mobile phone (even though this still needs improvements).
+
+
+# Credits
+
+Background music: Cat Song by Dan Knoflicek (https://opengameart.org/users/macro).
 
 
 # Slides
