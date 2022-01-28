@@ -1,4 +1,3 @@
-// Game Logic:
 class Game {
   constructor() {
     this.kittensArr = [];
@@ -30,6 +29,8 @@ class Game {
     this.gamePage = document.getElementById("game-board");
     this.counter = document.getElementById("counter");
   }
+
+  // Game Logic:
 
   start() {
     this.backgroundMusic.play();
@@ -161,14 +162,12 @@ class Kitten {
   }
 }
 
-class MommaCat {
-  constructor() {
+class MommaCat extends Kitten {
+  constructor(positionX, positionY, domElement) {
+    super(positionX, positionY, domElement);
     this.className = "momma";
     this.width = 7;
     this.height = 12;
-    this.positionX = Math.floor(Math.random() * (100 - this.width + 1));
-    this.positionY = Math.floor(Math.random() * (90 - this.height + 1));
-    this.domElement = null;
   }
 }
 
