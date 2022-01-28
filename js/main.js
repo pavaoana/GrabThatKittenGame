@@ -7,7 +7,7 @@ class Game {
     this.mommaPoints = 3;
     this.maxKittens = 13;
     // if max=13, max it's actually 23 (we're removing elements from the array)
-    this.minKittens = 7; // for the same reason, this doesn't need to be lower than maxKittens
+    this.minKittens = 17; // for the same reason, this doesn't need to be lower than maxKittens
 
     this.meowSound = new Audio("./sounds/cat-meow.wav");
     this.meowSound.volume = 0.25;
